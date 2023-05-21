@@ -1,0 +1,4 @@
+name: HotPotato
+version: '${project.version}'
+main: me.bubbles.hotpotato.HotPotato
+api-version: 1.19
