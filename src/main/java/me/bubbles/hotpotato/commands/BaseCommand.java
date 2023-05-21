@@ -2,6 +2,7 @@ package me.bubbles.hotpotato.commands;
 
 import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.commands.manager.Command;
+import me.bubbles.hotpotato.messages.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,9 +38,9 @@ public class BaseCommand extends Command {
 
     private String getArgs() {
 
-        String prefix = plugin.getConfigManager().getConfig("messages.yml").getFileConfiguration().getString("PREFIX");
-        String pri = plugin.getConfigManager().getConfig("messages.yml").getFileConfiguration().getString("COLOR_PRIMARY"); // primary color
-        String sec = plugin.getConfigManager().getConfig("messages.yml").getFileConfiguration().getString("COLOR_SECONDARY"); // secondary color
+        String prefix = Messages.Message.PREFIX.getStr();
+        String pri = Messages.Message.PRIMARY.getStr(); // primary color
+        String sec = Messages.Message.SECONDARY.getStr(); // secondary color
 
         StringBuilder stringBuilder = new StringBuilder();
         String topLine = prefix + pri + "Commands:";

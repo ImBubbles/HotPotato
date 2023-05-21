@@ -2,7 +2,7 @@ package me.bubbles.hotpotato;
 
 import me.bubbles.hotpotato.commands.manager.CommandManager;
 import me.bubbles.hotpotato.events.manager.EventManager;
-import me.bubbles.hotpotato.files.ConfigManager;
+import me.bubbles.hotpotato.configs.ConfigManager;
 import me.bubbles.hotpotato.games.GameManager;
 import me.bubbles.hotpotato.maps.MapManager;
 import me.bubbles.hotpotato.messages.Messages;

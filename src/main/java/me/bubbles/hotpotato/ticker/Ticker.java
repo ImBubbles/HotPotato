@@ -1,8 +1,11 @@
 package me.bubbles.hotpotato.ticker;
 
 import me.bubbles.hotpotato.HotPotato;
+import me.bubbles.hotpotato.games.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import java.util.ArrayList;
 
 public class Ticker {
 

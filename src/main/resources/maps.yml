@@ -2,7 +2,10 @@ maps:
   example:
     name: "Example"
     world: "world"
-    maxplayers: 5
+    maxplayers: 25
+    rounds: 5
+    starttime: 30
+    endtime: 10
     spawnpoints:
       - "0,0,0,90,0"
       - "1,1,1,90,0"

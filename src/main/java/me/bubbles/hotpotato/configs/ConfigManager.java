@@ -1,9 +1,8 @@
-package me.bubbles.hotpotato.files;
+package me.bubbles.hotpotato.configs;
 
 import me.bubbles.hotpotato.HotPotato;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -44,6 +44,16 @@ public class User {
         player.sendMessage(newStr);
     }
 
+    public void sendMessage(String message) {
+        String newStr = ChatColor.translateAlternateColorCodes('&',message
+                .replace("%name%",player.getName())
+                .replace("%prefix%",Messages.Message.PREFIX.getStr())
+                .replace("%wins%",String.valueOf(getWins()))
+                .replace("%primary%", Messages.Message.PRIMARY.getStr())
+                .replace("%secondary%", Messages.Message.SECONDARY.getStr()));
+        player.sendMessage(newStr);
+    }
+
     // GETTERS
 
     public Player getPlayer() {
@@ -70,12 +80,39 @@ public class User {
 
     // QUEUE
 
-    public void Queue() {
+    public boolean queue() {
+
+        if(inGame())
+            return false;
+
         for(Game game : plugin.getGameManager().getGames()) {
             if(game.getStatus()==Game.Status.FILLING) {
                 game.addUser(this);
+                this.game=game;
+                return true;
             }
         }
+        Game game = plugin.getGameManager().createGame();
+        game.addUser(this);
+
+        return true;
+
+    }
+
+    public boolean queue(Map map) {
+        if(inGame())
+            return false;
+
+        for(Game game : plugin.getGameManager().getGames()) {
+            if(game.getStatus()==Game.Status.FILLING&&game.getMap().equals(map)) {
+                game.addUser(this);
+                this.game=game;
+                return true;
+            }
+        }
+        Game game = plugin.getGameManager().createGame(map);
+        game.addUser(this);
+        return true;
     }
 
     public boolean inGame() {

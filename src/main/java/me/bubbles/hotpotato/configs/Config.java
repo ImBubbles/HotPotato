@@ -1,4 +1,4 @@
-package me.bubbles.hotpotato.files;
+package me.bubbles.hotpotato.configs;
 
 import me.bubbles.hotpotato.HotPotato;
 import org.bukkit.configuration.file.FileConfiguration;

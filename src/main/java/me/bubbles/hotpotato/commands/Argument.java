@@ -60,4 +60,24 @@ public class Argument {
         }
     }
 
+    public String getArgsMessage() {
+
+        String prefix = Messages.Message.PREFIX.getStr();
+        String pri = Messages.Message.PRIMARY.getStr(); // primary color
+        String sec = Messages.Message.SECONDARY.getStr(); // secondary color
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String topLine = prefix + pri + arg;
+        stringBuilder.append(topLine);
+        stringBuilder.append("\n");
+
+        for(Argument arg : arguments) {
+            String command = pri + "/" + this.getArg() + sec + arg.getDisplay();
+            stringBuilder.append(command);
+        }
+
+        return stringBuilder.toString();
+
+    }
+
 }

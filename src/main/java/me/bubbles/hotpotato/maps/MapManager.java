@@ -34,13 +34,16 @@ public class MapManager {
                     selection.getString("world")
             );
             int maxPlayers=selection.getInt("maxplayers");
+            int startTime=selection.getInt("starttime");
+            int endTime=selection.getInt("endtime");
+            int rounds=selection.getInt("rounds");
 
             List<Location> spawnPoints = new ArrayList<>();
             for(String str : selection.getStringList("spawnpoints")) {
                 spawnPoints.add(locationFromString(world,str));
             }
 
-            Map map = new Map(name,world,maxPlayers,spawnPoints);
+            Map map = new Map(name,world,maxPlayers,startTime,endTime,rounds,spawnPoints);
             mapsList.add(map);
         }
 
@@ -55,6 +58,10 @@ public class MapManager {
                 Float.parseFloat(loc.split(",")[3]),
                 Float.parseFloat(loc.split(",")[4])
                 );
+    }
+
+    public List<Map> getMaps() {
+        return mapsList;
     }
 
 }

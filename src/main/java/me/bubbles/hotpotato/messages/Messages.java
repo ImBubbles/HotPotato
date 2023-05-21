@@ -13,7 +13,6 @@ public class Messages {
     public enum Message {
         NO_PERMS(config.getString("NO_PERMS")),
         PREFIX(config.getString("PREFIX")),
-        RELOAD(config.getString("RELOAD")),
         PRIMARY(config.getString("COLOR_PRIMARY")),
         SECONDARY(config.getString("COLOR_SECONDARY"));
 
