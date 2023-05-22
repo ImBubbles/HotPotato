@@ -1,0 +1,9 @@
+name: HotPotato
+version: '1.0.0'
+main: me.bubbles.hotpotato.HotPotato
+api-version: 1.19
+commands:
+  hotpotato:
+    usage: </command>
+    description: Base hot potato command
+    aliases: [hp]
