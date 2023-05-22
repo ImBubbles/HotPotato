@@ -36,7 +36,6 @@ public final class HotPotato extends JavaPlugin {
                 "messages.yml",
                 "data.yml"
         );
-        defaultCfg();
 
         // Instance variables
         commandManager=new CommandManager(this);
@@ -54,30 +53,6 @@ public final class HotPotato extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-
-    // DEFAULT CFG
-    public void defaultCfg() {
-        configManager.getConfig("data.yml").getFileConfiguration().addDefault("players.example.wins",0);
-        FileConfiguration messages = configManager.getConfig("messages.yml").getFileConfiguration();
-        messages.addDefault("PREFIX","&8[&c&lHotPotato&8]");
-        messages.addDefault("COLOR_PRIMARY","&a");
-        messages.addDefault("COLOR_SECONDARY","&e");
-        messages.addDefault("NO_PERMS","&cYou do not have permission to do that!");
-        FileConfiguration maps = configManager.getConfig("maps.yml").getFileConfiguration();
-        maps.addDefault("maps.example.name","Example");
-        maps.addDefault("maps.example.world","world");
-        maps.addDefault("maps.example.maxplayers",25);
-        maps.addDefault("maps.example.rounds",5);
-        maps.addDefault("maps.example.starttime",60);
-        maps.addDefault("maps.example.endtime",10);
-        maps.addDefault("maps.example.lobby","0,0,0,90,0");
-        ArrayList<String> spawnPoints = new ArrayList<>();
-        spawnPoints.add("0,0,0,90,0");
-        spawnPoints.add("1,1,1,90,0");
-        spawnPoints.add("2,2,2,90,0");
-        maps.addDefault("maps.example.spawnpoints",spawnPoints);
-        configManager.saveAll();
     }
 
     // RELOAD CFG

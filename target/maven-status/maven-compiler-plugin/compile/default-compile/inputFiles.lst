@@ -1,3 +1,4 @@
+D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\events\PlayerDamage.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\map\List.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\events\Leave.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\BaseCommand.java
@@ -19,6 +20,7 @@ D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\events\manager
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\HotPotato.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\maps\MapManager.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\configs\Config.java
+D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\map\SetMaxPlayers.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\Leave.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\manager\Command.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\maps\MapMaker.java
@@ -27,6 +29,7 @@ D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\events\manager
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\map\SetLobby.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\games\Game.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\map\Create.java
+D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\events\InventoryTamper.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\manager\CommandManager.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\Reload.java
 D:\IntelliJ Projects\HotPotato\src\main\java\me\bubbles\hotpotato\commands\map\Map.java

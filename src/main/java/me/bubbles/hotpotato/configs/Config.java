@@ -12,23 +12,19 @@ public class Config {
     private File file;
     private String name;
     private FileConfiguration fileConfiguration;
+    private HotPotato plugin;
 
     public Config(HotPotato plugin, String name) {
-        this(new File(plugin.getDataFolder(),name));
+        this(plugin,new File(plugin.getDataFolder(),name));
     }
 
-    public Config(File file) {
+    public Config(HotPotato plugin, File file) {
 
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        this.plugin=plugin;
+
+        plugin.saveResource(file.getName(),false);
 
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
-        fileConfiguration.options().copyDefaults(true);
         try {
             fileConfiguration.save(file);
         } catch (IOException e) {
