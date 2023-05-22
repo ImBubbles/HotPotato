@@ -89,7 +89,6 @@ public class Round {
                 p.getInventory().clear();
                 alive.remove(user);
                 dead.add(user);
-                p.damage(100);
             }
         }
 

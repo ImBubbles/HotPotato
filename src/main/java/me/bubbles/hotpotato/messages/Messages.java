@@ -3,7 +3,6 @@ package me.bubbles.hotpotato.messages;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class Messages {
-
     private static FileConfiguration config;
 
     public Messages(FileConfiguration configuration) {
