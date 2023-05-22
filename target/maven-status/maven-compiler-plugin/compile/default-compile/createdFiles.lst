@@ -8,6 +8,7 @@ me\bubbles\hotpotato\maps\MapManager.class
 me\bubbles\hotpotato\commands\Argument.class
 me\bubbles\hotpotato\commands\map\SetLobby.class
 me\bubbles\hotpotato\ticker\Ticker.class
+me\bubbles\hotpotato\events\PlayerDamage.class
 me\bubbles\hotpotato\configs\ConfigManager.class
 me\bubbles\hotpotato\ticker\Ticker$1.class
 me\bubbles\hotpotato\commands\map\List.class
@@ -20,6 +21,7 @@ me\bubbles\hotpotato\commands\map\SetMaxPlayers.class
 me\bubbles\hotpotato\games\rounds\Round.class
 me\bubbles\hotpotato\commands\Leave.class
 me\bubbles\hotpotato\commands\map\Create.class
+me\bubbles\hotpotato\events\InventoryTamper.class
 me\bubbles\hotpotato\users\UserManager.class
 me\bubbles\hotpotato\games\Game$Status.class
 me\bubbles\hotpotato\commands\map\AddSpawn.class

@@ -1,8 +1,10 @@
 package me.bubbles.hotpotato.events.manager;
 
 import me.bubbles.hotpotato.HotPotato;
+import me.bubbles.hotpotato.events.InventoryTamper;
 import me.bubbles.hotpotato.events.Join;
 import me.bubbles.hotpotato.events.Leave;
+import me.bubbles.hotpotato.events.PlayerDamage;
 
 public class EventManager {
     private HotPotato plugin;
@@ -19,7 +21,7 @@ public class EventManager {
     }
 
     public void registerEvents() {
-        addEvent(new Join(plugin),new Leave(plugin));
+        addEvent(new Join(plugin),new Leave(plugin),new InventoryTamper(plugin), new PlayerDamage(plugin));
     }
 
 }
