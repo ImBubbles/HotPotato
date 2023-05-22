@@ -6,10 +6,10 @@ import me.bubbles.hotpotato.users.User;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetRounds extends Argument {
+public class SetMaxPlayers extends Argument {
 
-    public SetRounds(HotPotato plugin, int index, Argument base) {
-        super(plugin, "setrounds", "SetRounds <rounds>", index, base);
+    public SetMaxPlayers(HotPotato plugin, int index, Argument base) {
+        super(plugin, "setmaxplayers", "SetMaxPlayers <#>", index, base);
     }
 
     @Override
@@ -17,15 +17,15 @@ public class SetRounds extends Argument {
         if(sender instanceof Player) {
             User user = plugin.getUserManager().getUser((Player) sender);
 
-            if(args.length==index) {
+            if(args.length==index-1) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }
 
-            int rounds;
+            int players;
 
             try {
-                rounds=Integer.parseInt(args[index]);
+                players=Integer.parseInt(args[index]);
             } catch(NullPointerException e) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
@@ -35,8 +35,8 @@ public class SetRounds extends Argument {
                 user.sendMessage("%prefix% %primary%Select a map first!");
             }
 
-            user.getMapMaker().setRounds(rounds);
-            user.sendMessage("%prefix% %primary%Total rounds set to %secondary%"+rounds+"%primary%.");
+            user.getMapMaker().setMaxPlayers(players);
+            user.sendMessage("%prefix% %primary%Max players set to %secondary%"+players+"%primary%.");
 
         }
     }

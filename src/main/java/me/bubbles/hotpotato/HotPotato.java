@@ -54,9 +54,9 @@ public final class HotPotato extends JavaPlugin {
 
     // RELOAD CFG
     public void reload() {
-        this.messages=(new Messages(getConfigManager().getConfig("messages.yml").getFileConfiguration()));
+        this.mapManager=new MapManager(this);
         getConfigManager().reloadAll();
-        getMapManager().loadMaps();
+        this.messages=(new Messages(getConfigManager().getConfig("messages.yml").getFileConfiguration()));
     }
 
     // TICKER

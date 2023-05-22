@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SetStartTime extends Argument {
 
     public SetStartTime(HotPotato plugin, int index, Argument base) {
-        super(plugin, "setstarttime", "setstarttime <seconds>", index, base);
+        super(plugin, "setstarttime", "SetStartTime <seconds>", index, base);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class SetStartTime extends Argument {
         if(sender instanceof Player) {
             User user = plugin.getUserManager().getUser((Player) sender);
 
-            if(!(args.length==index-1)) {
+            if(args.length==index-1) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }
@@ -36,7 +36,7 @@ public class SetStartTime extends Argument {
             }
 
             user.getMapMaker().setStartTime(time);
-            user.sendMessage("%prefix% %primary%First round time set to %secondary%"+time+"%primary.");
+            user.sendMessage("%prefix% %primary%First round time set to %secondary%"+time+"%primary%.");
 
         }
     }

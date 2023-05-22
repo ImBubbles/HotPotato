@@ -17,22 +17,17 @@ public class MapMaker {
     private ConfigurationSection mapConfig;
 
     public MapMaker(HotPotato plugin, Map map) {
-        this(plugin);
+        this(plugin,map.getName());
         this.map=map;
-        this.name=map.getName();
     }
 
     public MapMaker(HotPotato plugin, String name) {
-        this(plugin);
         this.name=name;
+        this.plugin=plugin;
         if(plugin.getMapManager().mapFromString(name)!=null) {
             this.map=plugin.getMapManager().mapFromString(name);
         }
-    }
-
-    private MapMaker(HotPotato plugin) {
-        this.plugin=plugin;
-        this.mapConfig=plugin.getConfigManager().getConfig("maps.yml").getFileConfiguration().getConfigurationSection("maps."+name);
+        this.mapConfig=plugin.getConfigManager().getConfig("maps.yml").getFileConfiguration().getConfigurationSection("maps."+name.toLowerCase());
     }
 
     public void createMap() {
@@ -52,6 +47,8 @@ public class MapMaker {
 
         plugin.getConfigManager().saveAll();
 
+        mapConfig=plugin.getConfigManager().getConfig("maps.yml").getFileConfiguration().getConfigurationSection("maps."+name.toLowerCase());
+
     }
 
     public void addSpawnPoint(Location loc) {
@@ -67,6 +64,7 @@ public class MapMaker {
         List<String> result = new ArrayList<>();
         result.add(str);
         mapConfig.set("spawnpoints",result);
+
         plugin.getConfigManager().saveAll();
     }
 

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SetEndTime extends Argument {
 
     public SetEndTime(HotPotato plugin, int index, Argument base) {
-        super(plugin, "setendtime", "setendtime <seconds>", index, base);
+        super(plugin, "setendtime", "SetEndTime <seconds>", index, base);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class SetEndTime extends Argument {
         if(sender instanceof Player) {
             User user = plugin.getUserManager().getUser((Player) sender);
 
-            if(!(args.length==index-1)) {
+            if(args.length==index-1) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }
@@ -36,7 +36,7 @@ public class SetEndTime extends Argument {
             }
 
             user.getMapMaker().setStartTime(time);
-            user.sendMessage("%prefix% %primary%Last round time set to %secondary%"+time+"%primary.");
+            user.sendMessage("%prefix% %primary%Last round time set to %secondary%"+time+"%primary%.");
 
         }
     }

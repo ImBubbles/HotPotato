@@ -15,8 +15,9 @@ public class Map {
     private int rounds;
     private int decay;
     private List<Location> spawnPoints;
+    private Location lobby;
 
-    public Map(String name, World world, int maxPlayers, int startTime, int endTime, int rounds, List<Location> spawnPoints) {
+    public Map(String name, World world, int maxPlayers, int startTime, int endTime, int rounds, List<Location> spawnPoints, Location lobby) {
         this.name=name;
         this.world=world;
         this.maxPlayers=maxPlayers;
@@ -24,6 +25,7 @@ public class Map {
         this.startTime=startTime;
         this.endTime=endTime;
         this.decay=maxPlayers/rounds;
+        this.lobby=lobby;
     }
 
     public String getName() {
@@ -56,6 +58,9 @@ public class Map {
 
     public List<Location> getSpawnPoints() {
         return spawnPoints;
+    }
+    public Location getLobby() {
+        return lobby;
     }
 
 }

@@ -10,16 +10,17 @@ import org.bukkit.entity.Player;
 public class Map extends Argument {
 
     public Map(HotPotato plugin,int index) {
-        super(plugin,"map","map",index);
+        super(plugin,"map","Map [args]",index);
         setPermission("admin");
         addArguments(
-                new Select(plugin,index,this),
-                new Create(plugin,index,this),
-                new AddSpawn(plugin,index,this),
-                new SetRounds(plugin,index,this),
-                new SetLobby(plugin,index,this),
-                new SetStartTime(plugin,index,this),
-                new SetEndTime(plugin,index,this));
+                new Select(plugin,getIndex(),this),
+                new Create(plugin,getIndex(),this),
+                new AddSpawn(plugin,getIndex(),this),
+                new SetRounds(plugin,getIndex(),this),
+                new SetLobby(plugin,getIndex(),this),
+                new SetStartTime(plugin,getIndex(),this),
+                new SetEndTime(plugin,getIndex(),this),
+                new List(plugin,getIndex(),this));
     }
 
     @Override
@@ -34,13 +35,13 @@ public class Map extends Argument {
             plugin.getUserManager().getUser(p).sendMessage(Messages.Message.NO_PERMS);
         }
 
-        if(!(args.length==index-1)) { // IF PLAYER SENDS NO ARGUMENTS
+        if(args.length==index) { // IF PLAYER SENDS NO ARGUMENTS
             p.sendMessage(ChatColor.translateAlternateColorCodes('&',getArgsMessage()));
             return;
         }
 
         for(Argument argument : getArguments()) { // IF PLAYER SENDS ARGUMENTS
-            if(argument.getArg().equals(args[index])) {
+            if(argument.getArg().equalsIgnoreCase(args[index])) {
                 argument.run(sender, args);
             }
         }

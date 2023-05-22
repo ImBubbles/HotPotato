@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class AddSpawn extends Argument {
 
     public AddSpawn(HotPotato plugin, int index, Argument base) {
-        super(plugin, "addspawn", "addspawn", index, base);
+        super(plugin, "addspawn", "AddSpawn", index, base);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class AddSpawn extends Argument {
         if(sender instanceof Player) {
             User user = plugin.getUserManager().getUser((Player) sender);
 
-            if(!(args.length==index-1)) {
+            if(!(args.length==index)) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }

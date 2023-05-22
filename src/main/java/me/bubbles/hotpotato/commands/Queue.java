@@ -10,13 +10,15 @@ import org.bukkit.entity.Player;
 public class Queue extends Argument {
 
     public Queue(HotPotato plugin, int index) {
-        super(plugin, "queue", "queue <map>", index);
+        super(plugin, "queue", "Queue <map>", index);
         setPermission("queue");
     }
 
     @Override
     public void run(CommandSender sender, String[] args) {
         if(sender instanceof Player) {
+
+            Map map;
 
             // IF PLAYER HAS PERMISSION
 
@@ -34,9 +36,9 @@ public class Queue extends Argument {
 
             // IF MAP NOT CHOSEN
 
-            if(args.length>=index) {
-                user.sendMessage("%prefix% %primary%You are now in a lobby!");
-                user.queue();
+            if(args.length==index) {
+                map = user.queue();
+                user.sendMessage("%prefix% %primary%You joined a lobby with map %secondary%"+map.getName()+"%primary%.");
                 return;
             }
 
@@ -52,10 +54,10 @@ public class Queue extends Argument {
                 return;
             }
 
-            Map map = plugin.getMapManager().mapFromString(args[index]);
+            map = plugin.getMapManager().mapFromString(args[index]);
 
-            user.sendMessage("%prefix% %primary%You are now in a lobby for map %secondary%"+map.getName()+"%primary%.");
             user.queue(map);
+            user.sendMessage("%prefix% %primary%You joined a lobby with map %secondary%"+map.getName()+"%primary%.");
 
         }
     }

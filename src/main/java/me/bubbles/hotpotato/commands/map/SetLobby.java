@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SetLobby extends Argument {
 
     public SetLobby(HotPotato plugin, int index, Argument base) {
-        super(plugin, "setlobby", "setlobby", index, base);
+        super(plugin, "setlobby", "SetLobby", index, base);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class SetLobby extends Argument {
         if(sender instanceof Player) {
             User user = plugin.getUserManager().getUser((Player) sender);
 
-            if(!(args.length==index-1)) {
+            if(args.length==index-1) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }

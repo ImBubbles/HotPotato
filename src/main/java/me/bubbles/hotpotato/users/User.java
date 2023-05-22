@@ -102,12 +102,16 @@ public class User {
         this.inventoryContents=player.getInventory().getContents();
     }
 
+    public void setWins(int wins) {
+        data.set("wins",wins);
+    }
+
     // QUEUE
 
-    public boolean queue() {
+    public Map queue() {
 
         if(inGame())
-            return false;
+            return null;
 
         updateInventoryContents();
         getPlayer().getInventory().clear();
@@ -116,19 +120,19 @@ public class User {
             if(game.getStatus()==Game.Status.FILLING) {
                 game.addUser(this);
                 this.game=game;
-                return true;
+                return game.getMap();
             }
         }
         Game game = plugin.getGameManager().createGame();
         game.addUser(this);
 
-        return true;
+        return game.getMap();
 
     }
 
-    public boolean queue(Map map) {
+    public Map queue(Map map) {
         if(inGame())
-            return false;
+            return null;
 
         updateInventoryContents();
         getPlayer().getInventory().clear();
@@ -137,14 +141,14 @@ public class User {
             if(game.getStatus()==Game.Status.FILLING&&game.getMap().equals(map)) {
                 game.addUser(this);
                 this.game=game;
-                return true;
+                return game.getMap();
             }
         }
 
         Game game = plugin.getGameManager().createGame(map);
         game.addUser(this);
 
-        return true;
+        return game.getMap();
     }
 
     public boolean leave() {

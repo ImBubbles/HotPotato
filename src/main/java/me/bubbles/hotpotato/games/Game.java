@@ -4,7 +4,9 @@ import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.games.rounds.Round;
 import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.users.User;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +68,11 @@ public class Game {
 
     public void end(User winner) {
         broadcast("%prefix% %primary%The match has concluded, the winner is %secondary%"+winner.getPlayer().getName()+"%primary%.");
+        winner.setWins(winner.getWins()+1);
+        winner.sendMessage("%prefix% %primary%You won the match!");
         for(User user : userList) {
             user.leave();
+            showAll(user);
         }
     }
 
@@ -75,6 +80,13 @@ public class Game {
         broadcast("%prefix% %primary%The match has been stopped.");
         for(User user : userList) {
             user.leave();
+            showAll(user);
+        }
+    }
+
+    public void showAll(User user) {
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            user.getPlayer().showPlayer(plugin,p);
         }
     }
 
@@ -87,6 +99,7 @@ public class Game {
     // GAME LOGIC
     public void addUser(User user) {
         userList.add(user);
+        user.getPlayer().teleport(map.getLobby());
         if(status.equals(Status.FILLING)) {
             broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has joined the game.%secondary% ("+userList.size()+"/"+map.getMaxPlayers()+")");
             return;
@@ -97,6 +110,17 @@ public class Game {
         }
         broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has joined the game.");
         user.getPlayer().setGameMode(GameMode.ADVENTURE);
+
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            User pUser = plugin.getUserManager().getUser(p);
+            if(!pUser.inGame()) {
+                return;
+            }
+            if(pUser.getGame().equals(this)) {
+                return;
+            }
+            user.getPlayer().hidePlayer(plugin,p);
+        }
     }
 
     public void removeUser(User user) {

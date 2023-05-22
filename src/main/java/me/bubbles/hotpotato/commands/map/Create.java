@@ -2,7 +2,6 @@ package me.bubbles.hotpotato.commands.map;
 
 import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.commands.Argument;
-import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.maps.MapMaker;
 import me.bubbles.hotpotato.users.User;
 import org.bukkit.command.CommandSender;
@@ -11,7 +10,7 @@ import org.bukkit.entity.Player;
 public class Create extends Argument {
 
     public Create(HotPotato plugin, int index, Argument base) {
-        super(plugin, "create", "create <name>", index, base);
+        super(plugin, "create", "Create <name>", index, base);
     }
 
     @Override
@@ -19,7 +18,8 @@ public class Create extends Argument {
         if(sender instanceof Player) {
 
             User user = plugin.getUserManager().getUser((Player) sender);
-            if(!(args.length==index)) {
+
+            if(args.length==index) {
                 user.sendMessage(getBase().getArgsMessage());
                 return;
             }

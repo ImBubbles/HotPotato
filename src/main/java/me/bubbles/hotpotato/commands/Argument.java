@@ -73,11 +73,11 @@ public class Argument {
         String sec = Messages.Message.SECONDARY.getStr(); // secondary color
 
         StringBuilder stringBuilder = new StringBuilder();
-        String topLine = prefix + pri + arg;
+        String topLine = prefix + pri + " " + display;
         stringBuilder.append(topLine);
 
         for(Argument argument : arguments) {
-            String command = "\n" + pri + "/" + argument.getArg() + sec + argument.getDisplay();
+            String command = "\n" + pri + argument.getDisplay();
             stringBuilder.append(command);
         }
 
@@ -88,4 +88,9 @@ public class Argument {
     public Argument getBase() {
         return base;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
 }

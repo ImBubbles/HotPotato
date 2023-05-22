@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class Leave extends Argument{
 
     public Leave(HotPotato plugin, int index) {
-        super(plugin, "leave", "leave", index);
+        super(plugin, "leave", "Leave", index);
         setPermission("leave");
     }
 

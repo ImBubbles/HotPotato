@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class Reload extends Argument {
     public Reload(HotPotato plugin,int index) {
-        super(plugin,"reload","reload",index);
+        super(plugin,"reload","Reload",index);
         setPermission("reload");
     }
 

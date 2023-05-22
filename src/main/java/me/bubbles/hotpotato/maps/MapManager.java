@@ -1,6 +1,7 @@
 package me.bubbles.hotpotato.maps;
 
 import me.bubbles.hotpotato.HotPotato;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -13,7 +14,8 @@ public class MapManager {
 
     private HotPotato plugin;
     private FileConfiguration maps;
-    private List<Map> mapsList = new ArrayList<>();
+    private List<Map> readyMapsList;
+    private List<String> allMapsList;
 
     public MapManager(HotPotato plugin) {
         this.plugin=plugin;
@@ -23,21 +25,20 @@ public class MapManager {
 
     public boolean loadMaps() {
 
-        this.mapsList=new ArrayList<>();
+        this.readyMapsList=new ArrayList<>();
+        this.allMapsList=new ArrayList<>();
+        this.maps=plugin.getConfigManager().getConfig("maps.yml").getFileConfiguration();
 
-        try {
-            maps.getConfigurationSection("maps").getKeys(false);
-        }catch(NullPointerException e) {
-            return false;
-        }
-
-        String[] required = {"name","world","maxplayers","rounds","starttime","endtime","spawnpoints"};
+        String[] required = {"name","world","maxplayers","rounds","starttime","endtime","spawnpoints","lobby"};
 
         for(String key : maps.getConfigurationSection("maps").getKeys(false)) {
 
             for(String requirement : required) {
-                if(!maps.getConfigurationSection("maps."+key).getKeys(false).contains(requirement))
+                if(!maps.getConfigurationSection("maps."+key).getKeys(false).contains(requirement)) {
+                    System.out.println("Map "+key+" is not finished.");
+                    allMapsList.add(key);
                     return false;
+                }
             }
 
             ConfigurationSection selection = maps.getConfigurationSection("maps."+key);
@@ -58,8 +59,9 @@ public class MapManager {
 
             Location lobby = locationFromString(world,selection.getString("lobby"));
 
-            Map map = new Map(name,world,maxPlayers,startTime,endTime,rounds,spawnPoints);
-            mapsList.add(map);
+            Map map = new Map(name,world,maxPlayers,startTime,endTime,rounds,spawnPoints,lobby);
+            allMapsList.add(map.getName());
+            readyMapsList.add(map);
         }
 
         return true;
@@ -78,13 +80,26 @@ public class MapManager {
     }
 
     public List<Map> getMaps() {
-        return mapsList;
+        return readyMapsList;
+    }
+
+    public List<String> getAllMaps() {
+        return allMapsList;
     }
 
     public Map mapFromString(String name) {
-        for(Map map : mapsList) {
+        for(Map map : readyMapsList) {
             if(map.getName().equalsIgnoreCase(name)) {
                 return map;
+            }
+        }
+        return null;
+    }
+
+    public String anyMapFromString(String name) {
+        for(String string : allMapsList) {
+            if(string.equalsIgnoreCase(name)) {
+                return string;
             }
         }
         return null;

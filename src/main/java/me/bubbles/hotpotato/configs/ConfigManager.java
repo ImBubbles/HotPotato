@@ -34,7 +34,7 @@ public class ConfigManager {
     public void reloadAll() {
         int index=0;
         for(Config config : configList) {
-            configList.set(index,new Config(new File(config.getName())));
+            configList.set(index,new Config(new File(config.getFile().getPath())));
             index++;
         }
         plugin.reloadConfig();
