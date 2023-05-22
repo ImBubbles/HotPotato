@@ -14,21 +14,7 @@ public class Config {
     private FileConfiguration fileConfiguration;
 
     public Config(HotPotato plugin, String name) {
-
-        this.name=name;
-
-        file = new File(plugin.getDataFolder(),name);
-
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        fileConfiguration = YamlConfiguration.loadConfiguration(file);
-
+        this(new File(plugin.getDataFolder(),name));
     }
 
     public Config(File file) {
@@ -42,6 +28,12 @@ public class Config {
         }
 
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
+        fileConfiguration.options().copyDefaults(true);
+        try {
+            fileConfiguration.save(file);
+        } catch (IOException e) {
+            // poop
+        }
 
         this.file=file;
         this.name=file.getName();

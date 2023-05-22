@@ -4,6 +4,7 @@ import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.games.rounds.Round;
 import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.users.User;
+import org.bukkit.GameMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,9 +64,23 @@ public class Game {
         this.round=new Round(this,map,round,alive,dead);
     }
 
+    public void end(User winner) {
+        broadcast("%prefix% %primary%The match has concluded, the winner is %secondary%"+winner.getPlayer().getName()+"%primary%.");
+        for(User user : userList) {
+            user.leave();
+        }
+    }
+
+    public void end() {
+        broadcast("%prefix% %primary%The match has been stopped.");
+        for(User user : userList) {
+            user.leave();
+        }
+    }
+
     public void broadcast(String message) {
         for(User user : userList) {
-            user.getPlayer().sendMessage(message);
+            user.sendMessage(message);
         }
     }
 
@@ -73,15 +88,25 @@ public class Game {
     public void addUser(User user) {
         userList.add(user);
         if(status.equals(Status.FILLING)) {
-            status=Status.STARTING;
+            broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has joined the game.%secondary% ("+userList.size()+"/"+map.getMaxPlayers()+")");
+            return;
         }
+        if(userList.size()==map.getMaxPlayers()) {
+            status=Status.STARTING;
+            return;
+        }
+        broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has joined the game.");
+        user.getPlayer().setGameMode(GameMode.ADVENTURE);
     }
 
     public void removeUser(User user) {
         userList.remove(user);
         if(status.equals(Status.STARTING)) {
             status=Status.FILLING;
+            broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has left the game.%secondary% "+userList.size()+"/"+map.getMaxPlayers()+")");
         }
+        broadcast("%prefix% %secondary%"+user.getPlayer().getName()+"%primary% has left the game.");
+        user.getPlayer().setGameMode(GameMode.SURVIVAL);
     }
 
     public List<User> getUsers() {

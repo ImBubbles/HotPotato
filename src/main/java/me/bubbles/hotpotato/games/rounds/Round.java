@@ -4,8 +4,10 @@ import me.bubbles.hotpotato.games.Game;
 import me.bubbles.hotpotato.games.Timer;
 import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.users.User;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,49 @@ public class Round {
         this.alive=alive;
         this.dead=dead;
         game.broadcast("%prefix% %primary%There are %secondary%"+alive.size()+"%primary% players alive.");
+
+        // Teleport
+
+        int index=0;
+        for(User user : alive) {
+            user.getPlayer().teleport(map.getSpawnPoints().get(index));
+            index=clamp(index+1,map.getSpawnPoints().size()-1,0);
+        }
+
+        // Get players to give potato
+
+        List<Integer> players=new ArrayList<>();
+        for(int i=0; i<getPlayersToBeEliminated(); i++) {
+            if(players.isEmpty()) {
+                players.set(i,getRandomNumber(0,alive.size()));
+                return;
+            }
+            int rng = getRandomNumber(0,alive.size());
+            while(players.contains(rng)) {
+                players.set(i,getRandomNumber(0,alive.size()));
+            }
+        }
+
+        // Give the potato
+
+        for(int i=0; i<players.size(); i++) { // set whole hotbar to POTATO
+            for(int m=36;m<=44;i++) {
+                alive.get(i).getPlayer().getInventory().setItem(m,new ItemStack(Material.POTATO));
+            }
+        }
+
+        // Make all alive adventure
+
+        for(User user : alive) {
+            user.getPlayer().setGameMode(GameMode.ADVENTURE);
+        }
+
+        // Make all dead spectator
+
+        for(User user : dead) {
+            user.getPlayer().setGameMode(GameMode.SPECTATOR);
+        }
+
     }
 
     public void onTick() {
@@ -36,20 +81,25 @@ public class Round {
         }
     }
 
-    private void nextRound() {
-        game.nextRound(map,round+1,alive,dead);
-    }
-
     private void endRound() {
+
         for(User user : alive) {
             Player p = user.getPlayer();
             if(p.getInventory().contains(Material.POTATO)) {
+                p.getInventory().clear();
                 alive.remove(user);
                 dead.add(user);
+                p.damage(100);
             }
         }
+
         game.broadcast("%prefix% %primary%There are %secondary%"+getPlayersToBeEliminated()+"%primary% players eliminated.");
-        nextRound();
+        if(round<map.getRounds()) {
+            game.nextRound(map,round+1,alive,dead);
+        }else{
+            game.end(alive.get(0));
+        }
+
     }
 
     private int getRoundTime() {
@@ -58,10 +108,19 @@ public class Round {
 
     private int getPlayersToBeEliminated() {
         int decay = map.getMaxPlayers()/map.getRounds();
-        if(alive.size()/decay<1) {
-            return 1;
-        }
-        return alive.size()/decay;
+        return Math.max(alive.size() / decay, 1);
+    }
+
+    private int clamp(int now, int max, int min) {
+        if(now>max)
+            return min;
+        if(now<min)
+            return max;
+        return now;
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return ((int) (Math.random() * (max - min + 1)+min));
     }
 
 }

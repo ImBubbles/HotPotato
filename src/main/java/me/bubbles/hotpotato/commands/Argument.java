@@ -12,17 +12,23 @@ import java.util.List;
 public class Argument {
 
     public HotPotato plugin;
-    private int index;
+    public int index;
     private List<Argument> arguments = new ArrayList<>();
     private String arg;
     private String display;
     private String permission;
+    private Argument base;
 
     public Argument(HotPotato plugin, String arg, String display, int index) {
         this.plugin=plugin;
-        this.index=index;
+        this.index=index+1;
         this.arg=arg;
         this.display=display;
+    }
+
+    public Argument(HotPotato plugin, String arg, String display, int index, Argument base) {
+        this(plugin,arg,display,index);
+        this.base=base;
     }
 
     public void run(CommandSender sender, String[] args) {
@@ -62,17 +68,16 @@ public class Argument {
 
     public String getArgsMessage() {
 
-        String prefix = Messages.Message.PREFIX.getStr();
+        String prefix = Messages.Message.PREFIX.getStr(); // prefix
         String pri = Messages.Message.PRIMARY.getStr(); // primary color
         String sec = Messages.Message.SECONDARY.getStr(); // secondary color
 
         StringBuilder stringBuilder = new StringBuilder();
         String topLine = prefix + pri + arg;
         stringBuilder.append(topLine);
-        stringBuilder.append("\n");
 
-        for(Argument arg : arguments) {
-            String command = pri + "/" + this.getArg() + sec + arg.getDisplay();
+        for(Argument argument : arguments) {
+            String command = "\n" + pri + "/" + argument.getArg() + sec + argument.getDisplay();
             stringBuilder.append(command);
         }
 
@@ -80,4 +85,7 @@ public class Argument {
 
     }
 
+    public Argument getBase() {
+        return base;
+    }
 }

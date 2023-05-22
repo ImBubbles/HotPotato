@@ -3,11 +3,15 @@ package me.bubbles.hotpotato.users;
 import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.games.Game;
 import me.bubbles.hotpotato.maps.Map;
+import me.bubbles.hotpotato.maps.MapMaker;
 import me.bubbles.hotpotato.messages.Messages;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class User {
 
@@ -15,20 +19,28 @@ public class User {
     private Game game;
     private HotPotato plugin;
     private ConfigurationSection data;
-    private Map selectedMap;
+    private ItemStack[] inventoryContents;
+    private MapMaker mapMaker;
 
     public User(Player player, HotPotato plugin) {
         this.player=player;
         this.plugin=plugin;
+        this.inventoryContents=player.getInventory().getContents();
 
         FileConfiguration data = plugin.getConfigManager().getConfig("data.yml").getFileConfiguration();
         ConfigurationSection configurationSection = data.getConfigurationSection("players");
 
-        if(!(configurationSection
-                .getKeys(false)
-                .contains(player.getUniqueId().toString()))) {
-            configurationSection.set(player.getUniqueId().toString()+".wins",0);
+        try {
+            if(!(configurationSection
+                    .getKeys(false)
+                    .contains(player.getUniqueId().toString()))) {
+                configurationSection.set(player.getUniqueId().toString()+".wins",0);
+            }
+        } catch (NullPointerException e) {
+            data.set("players."+player.getUniqueId()+".wins",0);
         }
+
+        plugin.getConfigManager().saveAll();
 
         this.data=data.getConfigurationSection("players").getConfigurationSection(player.getUniqueId().toString());
 
@@ -68,14 +80,26 @@ public class User {
         return data.getInt("wins");
     }
 
+    public ItemStack[] getInventoryContents() {
+        return inventoryContents;
+    }
+
+    public MapMaker getMapMaker() {
+        return mapMaker;
+    }
+
     // SETTERS
 
     public void setGame(Game game) {
         this.game = game;
     }
 
-    public void setSelectedMap(Map map) {
-        this.selectedMap=map;
+    public void setSelectedMap(MapMaker mapMaker) {
+        this.mapMaker=mapMaker;
+    }
+
+    public void updateInventoryContents() {
+        this.inventoryContents=player.getInventory().getContents();
     }
 
     // QUEUE
@@ -84,6 +108,9 @@ public class User {
 
         if(inGame())
             return false;
+
+        updateInventoryContents();
+        getPlayer().getInventory().clear();
 
         for(Game game : plugin.getGameManager().getGames()) {
             if(game.getStatus()==Game.Status.FILLING) {
@@ -103,6 +130,9 @@ public class User {
         if(inGame())
             return false;
 
+        updateInventoryContents();
+        getPlayer().getInventory().clear();
+
         for(Game game : plugin.getGameManager().getGames()) {
             if(game.getStatus()==Game.Status.FILLING&&game.getMap().equals(map)) {
                 game.addUser(this);
@@ -110,9 +140,24 @@ public class User {
                 return true;
             }
         }
+
         Game game = plugin.getGameManager().createGame(map);
         game.addUser(this);
+
         return true;
+    }
+
+    public boolean leave() {
+        for(Game game : plugin.getGameManager().getGames()) {
+            if(game.getUsers().contains(this)) {
+                game.removeUser(this);
+                this.game=null;
+                player.getInventory().setContents(inventoryContents);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean inGame() {

@@ -23,15 +23,8 @@ public final class HotPotato extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Instance variables
-        commandManager=new CommandManager(this);
-        eventManager=new EventManager(this);
-        configManager=new ConfigManager(this);
-        gameManager=new GameManager(this);
-        mapManager=new MapManager(this);
-        userManager=new UserManager(this);
-
         // Configs
+        configManager=new ConfigManager(this);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         configManager.addConfig(
@@ -40,6 +33,13 @@ public final class HotPotato extends JavaPlugin {
                 "messages.yml",
                 "data.yml"
         );
+
+        // Instance variables
+        commandManager=new CommandManager(this);
+        eventManager=new EventManager(this);
+        gameManager=new GameManager(this);
+        mapManager=new MapManager(this);
+        userManager=new UserManager(this);
 
         messages=new Messages(configManager.getConfig("messages.yml").getFileConfiguration());
 
@@ -52,15 +52,17 @@ public final class HotPotato extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    // RELOAD CFG
+    public void reload() {
+        this.messages=(new Messages(getConfigManager().getConfig("messages.yml").getFileConfiguration()));
+        getConfigManager().reloadAll();
+        getMapManager().loadMaps();
+    }
+
     // TICKER
     public void onSecond() {
         commandManager.onTick();
         gameManager.onTick();
-    }
-
-    // SETTERS
-    public void setMessages(Messages messages) {
-        this.messages=messages;
     }
 
     // GETTERS

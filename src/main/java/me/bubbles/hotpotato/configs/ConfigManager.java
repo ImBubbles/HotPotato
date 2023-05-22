@@ -3,6 +3,7 @@ package me.bubbles.hotpotato.configs;
 import me.bubbles.hotpotato.HotPotato;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,16 @@ public class ConfigManager {
             index++;
         }
         plugin.reloadConfig();
+    }
+
+    public void saveAll() {
+        for(Config config : configList) {
+            try {
+                config.getFileConfiguration().save(config.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -15,11 +15,11 @@ public class Reload extends Argument {
     public void run(CommandSender sender, String[] args) {
         if(sender instanceof Player) {
             Player p = (Player) sender;
+            if(!hasPermission(p))
+                return;
             plugin.getUserManager().getUser(p).sendMessage("%prefix% %primary%Config reloaded.");
         }
-        plugin.reloadConfig();
-        plugin.setMessages(new Messages(plugin.getConfigManager().getConfig("messages.yml").getFileConfiguration()));
-        plugin.getMapManager().loadMaps();
+        plugin.reload();
     }
 
 }
