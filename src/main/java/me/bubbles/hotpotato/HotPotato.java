@@ -60,7 +60,7 @@ public final class HotPotato extends JavaPlugin {
     }
 
     // TICKER
-    public void onSecond() {
+    public void onTick() {
         commandManager.onTick();
         gameManager.onTick();
     }
