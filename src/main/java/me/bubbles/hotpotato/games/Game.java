@@ -6,7 +6,9 @@ import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.users.User;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +58,14 @@ public class Game {
             onStart();
             status=Status.BUSY;
         }
+    }
+
+    public void tag(User tagger, User tagged) {
+        tagger.getPlayer().getInventory().clear();
+        for(int m=36;m<=44;m++) {
+            tagged.getPlayer().getInventory().setItem(m,new ItemStack(Material.POTATO));
+        }
+        broadcast("%prefix% %secondary%"+tagger.getPlayer().getName()+"%primary% has tagged %secondary%"+tagged.getPlayer().getName()+"%primary%.");
     }
 
     public void onStart() {

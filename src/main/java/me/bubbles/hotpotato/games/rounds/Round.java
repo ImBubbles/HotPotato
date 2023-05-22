@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Round {
@@ -55,7 +56,7 @@ public class Round {
         // Give the potato
 
         for(int i=0; i<players.size(); i++) { // set whole hotbar to POTATO
-            for(int m=36;m<=44;i++) {
+            for(int m=36;m<=44;m++) {
                 alive.get(i).getPlayer().getInventory().setItem(m,new ItemStack(Material.POTATO));
             }
         }
@@ -75,6 +76,10 @@ public class Round {
     }
 
     public void onTick() {
+        List<Integer> announceTimes = Arrays.asList(1, 2, 3, 4, 5, 10, 15, 30, 60, 120);
+        if(announceTimes.contains(timer.getTicks()/20)) {
+            game.broadcast("%prefix% %primary%Round will end in %secondary%"+timer.getTicks()/20+"%primary% seconds!");
+        }
         timer.onTick();
         if(timer.isOver()) {
             endRound();
@@ -82,7 +87,6 @@ public class Round {
     }
 
     private void endRound() {
-
         for(User user : alive) {
             Player p = user.getPlayer();
             if(p.getInventory().contains(Material.POTATO)) {
