@@ -19,10 +19,8 @@ public class Wins extends Argument {
 
         User user = plugin.getUserManager().getUser((Player) sender);
 
-        if(!hasPermission(user.getPlayer())) {
-            user.sendMessage(Messages.Message.NO_PERMS);
+        if(!hasPermission(user.getPlayer()))
             return;
-        }
 
         if(args.length==index) {
             user.sendMessage("%prefix% %primary%You have %secondary%"+user.getWins()+"%primary% wins.");
