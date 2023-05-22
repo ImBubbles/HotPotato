@@ -26,6 +26,7 @@ public class Map {
         this.endTime=endTime;
         this.decay=maxPlayers/rounds;
         this.lobby=lobby;
+        this.rounds=rounds;
     }
 
     public String getName() {
