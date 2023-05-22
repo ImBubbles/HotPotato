@@ -19,7 +19,7 @@ public class BaseCommand extends Command {
 
     public BaseCommand(HotPotato plugin) {
         super("hotpotato", plugin);
-        addArguments(new Reload(plugin,index),new Map(plugin,index),new Queue(plugin,index),new Leave(plugin,index));
+        addArguments(new Reload(plugin,index),new Map(plugin,index),new Queue(plugin,index),new Leave(plugin,index),new Wins(plugin,index));
     }
 
     @Override

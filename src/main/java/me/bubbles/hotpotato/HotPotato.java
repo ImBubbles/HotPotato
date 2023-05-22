@@ -44,7 +44,7 @@ public final class HotPotato extends JavaPlugin {
         mapManager=new MapManager(this);
         userManager=new UserManager(this);
 
-        messages=new Messages(configManager.getConfig("messages.yml").getFileConfiguration());
+        this.messages=(new Messages(getConfigManager().getConfig("messages.yml").getFileConfiguration()));
 
         // Ticker
         ticker=new Ticker(this);
@@ -92,7 +92,6 @@ public final class HotPotato extends JavaPlugin {
     public UserManager getUserManager() {
         return userManager;
     }
-
     public Ticker getTicker() {
         return ticker;
     }
