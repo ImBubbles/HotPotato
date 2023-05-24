@@ -1,13 +1,13 @@
 package me.bubbles.hotpotato.maps;
 
 import me.bubbles.hotpotato.HotPotato;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MapManager {
@@ -15,7 +15,7 @@ public class MapManager {
     private HotPotato plugin;
     private FileConfiguration maps;
     private List<Map> readyMapsList;
-    private List<String> allMapsList;
+    private HashSet<String> allMapsList;
 
     public MapManager(HotPotato plugin) {
         this.plugin=plugin;
@@ -26,7 +26,7 @@ public class MapManager {
     public boolean loadMaps() {
 
         this.readyMapsList=new ArrayList<>();
-        this.allMapsList=new ArrayList<>();
+        this.allMapsList=new HashSet<>();
         this.maps=plugin.getConfigManager().getConfig("maps.yml").getFileConfiguration();
 
         String[] required = {"name","world","maxplayers","rounds","starttime","endtime","spawnpoints","lobby"};
@@ -83,7 +83,7 @@ public class MapManager {
         return readyMapsList;
     }
 
-    public List<String> getAllMaps() {
+    public HashSet<String> getAllMaps() {
         return allMapsList;
     }
 

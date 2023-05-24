@@ -6,8 +6,6 @@ import me.bubbles.hotpotato.maps.Map;
 import me.bubbles.hotpotato.maps.MapMaker;
 import me.bubbles.hotpotato.messages.Messages;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

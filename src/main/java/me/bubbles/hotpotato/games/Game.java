@@ -19,6 +19,10 @@ public class Game {
     private Status status;
     private Map map;
     private List<User> userList = new ArrayList<>();
+
+    private List<User> alive = new ArrayList<>();
+
+    private List<User> dead = new ArrayList<>();
     private Round round;
     private Timer timer;
     private HotPotato plugin;
@@ -69,11 +73,11 @@ public class Game {
     }
 
     public void onStart() {
-        round=new Round(this,map,0,userList,new ArrayList<>());
+        round=new Round(this,map,0);
     }
 
-    public void nextRound(Map map, int round,List<User> alive, List<User> dead) {
-        this.round=new Round(this,map,round,alive,dead);
+    public void nextRound(Map map, int round) {
+        this.round=new Round(this,map,round);
     }
 
     public void end(User winner) {
@@ -145,6 +149,24 @@ public class Game {
 
     public List<User> getUsers() {
         return userList;
+    }
+
+    public List<User> getAlive() {
+        return alive;
+    }
+
+    public List<User> getDead() {
+        return dead;
+    }
+
+    // SETTERS
+
+    public void setAlive(List<User> alive) {
+        this.alive=alive;
+    }
+
+    public void setDead(List<User> dead) {
+        this.alive=dead;
     }
 
     public enum Status {

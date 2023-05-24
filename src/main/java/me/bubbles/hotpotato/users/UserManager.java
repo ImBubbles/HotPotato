@@ -3,13 +3,12 @@ package me.bubbles.hotpotato.users;
 import me.bubbles.hotpotato.HotPotato;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class UserManager {
 
     private HotPotato plugin;
-    private List<User> userList = new ArrayList<>();
+    private HashSet<User> userList = new HashSet<>();
 
     public UserManager(HotPotato plugin) {
         this.plugin=plugin;
@@ -20,8 +19,9 @@ public class UserManager {
             if(user.getPlayer().getUniqueId().equals(p.getUniqueId()))
                 return null;
         }
-        userList.add(new User(p,plugin));
-        return getUser(p);
+        User user = new User(p,plugin);
+        userList.add(user);
+        return user;
     }
 
     public User getUser(Player p) {

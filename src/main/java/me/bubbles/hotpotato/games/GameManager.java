@@ -2,22 +2,20 @@ package me.bubbles.hotpotato.games;
 
 import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.maps.Map;
-import me.bubbles.hotpotato.maps.MapManager;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
 public class GameManager {
 
     private HotPotato plugin;
-    private List<Game> games = new ArrayList<>();
+    private HashSet<Game> games = new HashSet<>();
 
     public GameManager(HotPotato plugin) {
         this.plugin=plugin;
     }
 
-    public List<Game> getGames() {
+    public HashSet<Game> getGames() {
         return games;
     }
 

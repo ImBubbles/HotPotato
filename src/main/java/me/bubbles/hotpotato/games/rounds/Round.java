@@ -22,13 +22,13 @@ public class Round {
     private int round;
     private Timer timer;
 
-    public Round(Game game, Map map, int round, List<User> alive, List<User> dead) {
+    public Round(Game game, Map map, int round) {
         this.map=map;
         this.game=game;
         this.round=round;
         this.timer=new Timer(getRoundTime()/20);
-        this.alive=alive;
-        this.dead=dead;
+        this.alive=game.getAlive();
+        this.dead=game.getDead();
         game.broadcast("%prefix% %primary%There are %secondary%"+alive.size()+"%primary% players alive.");
 
         // Teleport
@@ -49,8 +49,9 @@ public class Round {
             }
             int rng = getRandomNumber(0,alive.size());
             while(players.contains(rng)) {
-                players.set(i,getRandomNumber(0,alive.size()));
+                rng = getRandomNumber(0,alive.size());
             }
+            players.set(i,rng);
         }
 
         // Give the potato
@@ -96,9 +97,12 @@ public class Round {
             }
         }
 
+        game.setAlive(alive);
+        game.setDead(dead);
+
         game.broadcast("%prefix% %primary%There are %secondary%"+getPlayersToBeEliminated()+"%primary% players eliminated.");
         if(round<map.getRounds()) {
-            game.nextRound(map,round+1,alive,dead);
+            game.nextRound(map,round+1);
         }else{
             game.end(alive.get(0));
         }
