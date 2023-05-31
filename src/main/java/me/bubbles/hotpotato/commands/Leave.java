@@ -1,11 +1,12 @@
 package me.bubbles.hotpotato.commands;
 
 import me.bubbles.hotpotato.HotPotato;
+import me.bubbles.hotpotato.commands.manager.Argument;
 import me.bubbles.hotpotato.users.User;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Leave extends Argument{
+public class Leave extends Argument {
 
     public Leave(HotPotato plugin, int index) {
         super(plugin, "leave", "Leave", index);

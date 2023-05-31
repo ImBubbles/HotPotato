@@ -1,7 +1,6 @@
 package me.bubbles.hotpotato.commands.manager;
 
 import me.bubbles.hotpotato.HotPotato;
-import me.bubbles.hotpotato.commands.Argument;
 import me.bubbles.hotpotato.messages.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
@@ -19,7 +18,7 @@ public class Command implements CommandExecutor {
     private String permission;
     public String no_perms;
     private List<Argument> arguments = new ArrayList<>();
-    private final int index=0;
+    public final int INDEX=0;
 
     public Command(String command, HotPotato plugin) {
         this.command=command;
@@ -47,7 +46,7 @@ public class Command implements CommandExecutor {
     }
 
     public void setPermission(String permission) {
-        String node = "hotpotato." + permission;
+        String node = plugin.getPluginName() + "." + permission;
         this.permission=node;
         this.no_perms="&cYou do not have permission to do that: &4%node%";
         this.no_perms=no_perms.replace("%node%",node);
@@ -76,8 +75,8 @@ public class Command implements CommandExecutor {
         arguments.addAll(Arrays.asList(args));
     }
 
-    /*private List<Argument> getArguments() {
+    public List<Argument> getArguments() {
         return arguments;
-    }*/
+    }
 
 }

@@ -1,6 +1,7 @@
 package me.bubbles.hotpotato.commands;
 
 import me.bubbles.hotpotato.HotPotato;
+import me.bubbles.hotpotato.commands.manager.Argument;
 import me.bubbles.hotpotato.messages.Messages;
 import me.bubbles.hotpotato.users.User;
 import org.bukkit.Bukkit;

@@ -1,4 +1,4 @@
-package me.bubbles.hotpotato.commands;
+package me.bubbles.hotpotato.commands.manager;
 
 import me.bubbles.hotpotato.HotPotato;
 import me.bubbles.hotpotato.messages.Messages;
@@ -51,7 +51,7 @@ public class Argument {
     }
 
     public void setPermission(String permission) {
-        String node = "hotpotato." + permission;
+        String node = plugin.getPluginName() + "." + permission;
         this.permission=node;
     }
 

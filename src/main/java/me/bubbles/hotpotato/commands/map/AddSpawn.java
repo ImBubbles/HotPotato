@@ -1,7 +1,7 @@
 package me.bubbles.hotpotato.commands.map;
 
 import me.bubbles.hotpotato.HotPotato;
-import me.bubbles.hotpotato.commands.Argument;
+import me.bubbles.hotpotato.commands.manager.Argument;
 import me.bubbles.hotpotato.users.User;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
