@@ -1,10 +1,16 @@
 package me.bubbles.hotpotato.commands.manager;
 
 import me.bubbles.hotpotato.HotPotato;
+import me.bubbles.hotpotato.commands.Argument;
+import me.bubbles.hotpotato.messages.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Command implements CommandExecutor {
 
@@ -12,6 +18,8 @@ public class Command implements CommandExecutor {
     private String command;
     private String permission;
     public String no_perms;
+    private List<Argument> arguments = new ArrayList<>();
+    private final int index=0;
 
     public Command(String command, HotPotato plugin) {
         this.command=command;
@@ -45,8 +53,31 @@ public class Command implements CommandExecutor {
         this.no_perms=no_perms.replace("%node%",node);
     }
 
-    public void onTick() {
+    public String getArgsMessage() {
+
+        String prefix = Messages.Message.PREFIX.getStr();
+        String pri = Messages.Message.PRIMARY.getStr(); // primary color
+        String sec = Messages.Message.SECONDARY.getStr(); // secondary color
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String topLine = prefix + pri + " Commands:";
+        stringBuilder.append(topLine);
+
+        for(Argument arg : getArguments()) {
+            String command = "\n" + pri + "/" + getCommand() + sec + " " + arg.getDisplay() + "\n";
+            stringBuilder.append(command);
+        }
+
+        return stringBuilder.toString();
 
     }
+
+    public void addArguments(Argument... args) {
+        arguments.addAll(Arrays.asList(args));
+    }
+
+    /*private List<Argument> getArguments() {
+        return arguments;
+    }*/
 
 }

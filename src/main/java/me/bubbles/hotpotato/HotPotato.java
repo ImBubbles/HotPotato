@@ -8,10 +8,7 @@ import me.bubbles.hotpotato.maps.MapManager;
 import me.bubbles.hotpotato.messages.Messages;
 import me.bubbles.hotpotato.ticker.Ticker;
 import me.bubbles.hotpotato.users.UserManager;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
 
 public final class HotPotato extends JavaPlugin {
 
