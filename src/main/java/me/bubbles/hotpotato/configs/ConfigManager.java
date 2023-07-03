@@ -33,21 +33,12 @@ public class ConfigManager {
 
     public void reloadAll() {
         int index=0;
-        for(Config config : configList) {
-            configList.set(index,new Config(plugin,new File(config.getFile().getPath())));
-            index++;
-        }
+        configList.forEach(Config::reload);
         plugin.reloadConfig();
     }
 
     public void saveAll() {
-        for(Config config : configList) {
-            try {
-                config.getFileConfiguration().save(config.getFile());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        configList.forEach(Config::save);
     }
 
 }

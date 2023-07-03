@@ -26,9 +26,7 @@ public class CommandManager {
     }
 
     public void onTick() {
-        for(Command command : commandsList) {
-            command.onTick();
-        }
+        
     }
 
 }

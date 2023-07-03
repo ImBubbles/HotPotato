@@ -47,4 +47,16 @@ public class Config {
         return file;
     }
 
+    public void reload() {
+        this.file=new File(this.file.getPath());
+    }
+
+    public void save() {
+        try {
+            getFileConfiguration().save(getFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
