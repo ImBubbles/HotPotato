@@ -2,14 +2,11 @@ package me.bubbles.hotpotato.configs;
 
 import me.bubbles.hotpotato.HotPotato;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class ConfigManager {
 
-    private List<Config> configList = new ArrayList<>();
+    private HashSet<Config> configList = new HashSet<>();
     private HotPotato plugin;
 
     public ConfigManager(HotPotato plugin) {
@@ -32,7 +29,6 @@ public class ConfigManager {
     }
 
     public void reloadAll() {
-        int index=0;
         configList.forEach(Config::reload);
         plugin.reloadConfig();
     }
