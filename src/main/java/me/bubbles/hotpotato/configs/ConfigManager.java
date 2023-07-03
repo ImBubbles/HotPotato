@@ -24,7 +24,7 @@ public class ConfigManager {
 
     public Config getConfig(String name) {
         for(Config config : configList) {
-            if(config.getName().equals(name)) {
+            if(config.getName().equalsIgnoreCase(name)) {
                 return config;
             }
         }
