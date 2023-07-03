@@ -20,7 +20,6 @@ public final class HotPotato extends JavaPlugin {
     private UserManager userManager;
     private Ticker ticker;
     private Messages messages;
-    private String name="hotpotato";
 
     @Override
     public void onEnable() {
@@ -67,9 +66,6 @@ public final class HotPotato extends JavaPlugin {
     }
 
     // GETTERS
-    public String getPluginName() {
-        return name;
-    }
     public CommandManager getCommandManager() {
         return commandManager;
     }
